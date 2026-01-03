@@ -125,6 +125,15 @@ void bmv080_task(void *pvParameter)
 
     printf("Customized duty_cycling_period: %d s\r\n", duty_cycling_period);
 
+    /* Get default parameter "integration_time" */
+    uint16_t integration_time = 0;
+    bmv080_current_status = bmv080_get_parameter(handle, "integration_time", (void*)&integration_time);
+
+    printf("Default integration_time: %d s\r\n", integration_time);
+    /* Set custom parameter "integration_time" */
+    integration_time = PLVN_CFG_BMV080_INTEGRATION_TIME_S;
+    bmv080_current_status = bmv080_set_parameter(handle, "integration_time", (void*)&integration_time);
+
 
   bmv080_current_status = bmv080_start_duty_cycling_measurement(handle,get_tick_ms,E_BMV080_DUTY_CYCLING_MODE_0);
   if(bmv080_current_status != E_BMV080_OK)
