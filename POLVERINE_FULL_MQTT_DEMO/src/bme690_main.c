@@ -249,7 +249,7 @@ static char* buffer[600];
 
     if (!PVLN_CFG_BSEC_OUTPUT_UPDATE_GATED_BY_BMV080) {
         snprintf((char * __restrict__)buffer,600,"{\"ID\":\"%s\",\"R\":%.2f,\"T\":%.2f,\"P\":%.2f,\"H\":%.2f,\"IAQ\":%.2f,\"ACC\":%.2f,\"CO2\":%.2f,\"VOC\":%.2f,"
-                "\"mtof\":%.2f, \"bougb8\":%d, \"ltdt\":%d}\n",
+                "\"mtof\":%.2f, \"bougb8\":%d, \"ltdt\":%d}",
                 shortId,
                 (float)(output->timestamp/1000000)/1000., output->compensated_temperature, output->raw_pressure, output->compensated_humidity,
                 (float)output->iaq, (float)output->iaq_accuracy, output->co2_equivalent, output->breath_voc_equivalent,
@@ -260,7 +260,7 @@ static char* buffer[600];
     else if(PVLN_CFG_BSEC_OUTPUT_UPDATE_GATED_BY_BMV080 && flBMV080Published)
     {
         snprintf((char * __restrict__)buffer,600,"{\"ID\":\"%s\",\"R\":%.2f,\"T\":%.2f,\"P\":%.2f,\"H\":%.2f,\"IAQ\":%.2f,\"ACC\":%.2f,\"CO2\":%.2f,\"VOC\":%.2f,"
-                "\"mtof\":%.2f, \"bougb8\":%d, \"ltdt\":%d}\n",
+                "\"mtof\":%.2f, \"bougb8\":%d, \"ltdt\":%d}",
                 shortId,
                 (float)(output->timestamp/1000000)/1000., sb_average(&aveT), sb_average(&aveP), sb_average(&aveH),
                 sb_average(&aveIAQ), sb_average(&aveACC), sb_average(&aveCO2), sb_average(&aveVOC),
@@ -294,3 +294,4 @@ void bme690_app_start()
 {
   xTaskCreate(&bme690_task, "bme690_task", 60 * 1024, NULL, configMAX_PRIORITIES - 1, NULL);
 }
+
